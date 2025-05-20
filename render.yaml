@@ -1,10 +1,9 @@
-
 services:
   - type: cron
     name: forex-signals-bot
     schedule: "*/5 * * * *"
     env: python
-    buildCommand: ""
+    buildCommand: "pip install -r requirements.txt"
     startCommand: "python3 forex_signals.py"
     envVars:
       - key: BOT_TOKEN

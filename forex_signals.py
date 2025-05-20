@@ -1,5 +1,12 @@
+# auto-install requests if not present
+try:
+    import requests
+except ImportError:
+    import subprocess
+    import sys
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "requests"])
+    import requests
 
-import requests
 import datetime
 import os
 
@@ -7,7 +14,7 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHAT_ID = int(os.getenv("CHAT_ID"))
 SYMBOLS = ["EUR/USD", "GBP/USD", "USD/JPY", "AUD/CHF", "USD/CAD", "NZD/USD"]
 API_URL = "https://api.twelvedata.com/rsi"
-API_KEY = os.getenv("API_KEY")  # Получи бесплатный API ключ на https://twelvedata.com
+API_KEY = os.getenv("API_KEY")
 
 def get_rsi(symbol):
     params = {
@@ -40,7 +47,7 @@ def generate_signals():
         elif rsi_val < 30:
             direction = "BUY"
         if direction:
-            msg = f"📊 Сигнал: {symbol} — {direction}\n⏰ Время: {now}\n📈 RSI: {round(rsi_val, 2)}"
+            msg = f"📊 Сигнал: {symbol} — {direction}\\n⏰ Время: {now}\\n📈 RSI: {round(rsi_val, 2)}"
             send_signal(msg)
 
 generate_signals()

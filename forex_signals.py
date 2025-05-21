@@ -54,3 +54,4 @@ def generate_signals():
             send_signal(msg)
 
 generate_signals()
+send_signal("✅ Проверка: бот работает и может отправлять сообщения.")
